@@ -1,0 +1,18 @@
+<h1><%= @restaurant.name %></h1>
+<p><%= @restaurant.address %></p>
+
+<%= render 'reviews/form', restaurant: @restaurant, review: @review %>
+
+<h2 class="mt-4" id="counter">
+  <%= render 'reviews_count', restaurant: @restaurant %>
+</h2>
+
+<div id="reviews">
+  <% if @restaurant.reviews.blank? %>
+    Be the first to leave a review for <%= @restaurant.name %>
+  <% else %>
+    <% @restaurant.reviews.each do |review| %>
+      <%= render 'reviews/show', review: review, animate_class: nil %>
+    <% end %>
+  <% end %>
+</div>

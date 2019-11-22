@@ -1,0 +1,22 @@
+function insertReview(newReview) {
+  const reviewsList = document.querySelector('#reviews');
+  reviewsList.insertAdjacentHTML('beforeend', newReview);
+}
+
+function refreshForm(newForm) {
+  const form = document.querySelector('#new_review');
+  form.outerHTML = newForm;
+}
+
+function updateCounter(newCounter) {
+  const counter = document.querySelector('#counter');
+  counter.innerHTML = newCounter;
+}
+
+<% if @review.errors.any? %>
+  refreshForm("<%= j render 'reviews/form', restaurant: @restaurant, review: @review %>")
+<% else %>
+  insertReview("<%= j render 'reviews/show', review: @review, animate_class: 'rotateIn' %>");
+  refreshForm("<%= j render 'reviews/form', restaurant: @restaurant, review: Review.new %>")
+  updateCounter("<%= j render 'restaurants/reviews_count', restaurant: @restaurant %>")
+<% end %>
